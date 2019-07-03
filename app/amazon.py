@@ -8,6 +8,8 @@ import pandas as pd
 #from exceptions import ValueError
 from time import sleep
 import matplotlib.pyplot as plt
+import numpy as np
+import smtplib
 
 
 
@@ -110,6 +112,34 @@ def ReadAsin():
     df2=df1.drop_duplicates(subset=['URL','date'])
     
     print_graph(df2)
+    checkthreshold(df2)
+    subject="Price Update"
+    message="Daily Processing complete, please check the final file to see if the threshold has been met"
+    sendemail('pythont320@gmail.com','pb2233@stern.nyu.edu','pb2233@stern.nyu.edu',subject,message,'pythont320@gmail.com','test124578$')
+    
+            
+    
+def checkthreshold(df):
+    df['final']=np.where(df['SALE_PRICE']<=df['Threshold'],1,0)
+    df.to_csv('final.csv')
+    
+def sendemail(from_addr, to_addr_list, cc_addr_list,
+              subject, message,
+              login, password,
+              smtpserver='smtp.gmail.com:587'):
+    header  = 'From: %s\n' % from_addr
+    header += 'To: %s\n' % ','.join(to_addr_list)
+    header += 'Cc: %s\n' % ','.join(cc_addr_list)
+    header += 'Subject: %s\n\n' % subject
+    message = header + message
+ 
+    server = smtplib.SMTP(smtpserver)
+    server.starttls()
+    server.login(login,password)
+    problems = server.sendmail(from_addr, to_addr_list, message)
+    server.quit()
+    return problems
+
     
 if __name__ == "__main__":
     ReadAsin()

@@ -7,7 +7,7 @@ conda activate amazon-env
 
 
 From within the virtual environment, install the required packages
-third party packages: pandas, numpy, matplotlib 
+third party packages: pandas, numpy, matplotlib,lxml,requests
 pip install pandas
 pip install numpy
 pip install matplotlib
