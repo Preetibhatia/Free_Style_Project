@@ -12,7 +12,7 @@ import numpy as np
 import smtplib
 
 
-
+## AmazonParser function utilized from : https://www.scrapehero.com/tutorial-how-to-scrape-amazon-product-details-using-python/
 def AmzonParser(url,asin):
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
     page = requests.get(url,headers=headers)
