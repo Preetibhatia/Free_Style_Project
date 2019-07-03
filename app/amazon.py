@@ -9,6 +9,8 @@ import pandas as pd
 from time import sleep
 import matplotlib.pyplot as plt
 
+
+
 def AmzonParser(url,asin):
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
     page = requests.get(url,headers=headers)
@@ -96,7 +98,7 @@ def ReadAsin():
     df=pd.DataFrame(extracted_data)
     df['date']=str(date.today())
     df['SALE_PRICE']=df['SALE_PRICE'].astype(str)
-    df['SALE_PRICE']=df['SALE_PRICE'].str.slice(1)
+    df['SALE_PRICE']=df['SALE_PRICE'].str.slice (1)
     df['SALE_PRICE']=pd.to_numeric(df['SALE_PRICE'])
     final = pd.merge(df, asin, on=['ASIN'])
     
