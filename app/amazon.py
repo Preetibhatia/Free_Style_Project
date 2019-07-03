@@ -5,19 +5,15 @@ import os
 from datetime import date
 import requests
 import pandas as pd
-#from exceptions import ValueError
 from time import sleep
 import matplotlib.pyplot as plt
 import numpy as np
 import smtplib
-
-
 from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
 load_dotenv()
-
 
 ## AmazonParser function utilized from : https://www.scrapehero.com/tutorial-how-to-scrape-amazon-product-details-using-python/
 def AmzonParser(url,asin):
@@ -123,18 +119,18 @@ def ReadAsin():
     
     subject="Price Update"
     message="Daily Processing complete, please check the final file to see if the threshold has been met"
-    
     SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
-
-    MY_ADDRESS = os.environ.get("MY_ADDRESS")
-    
+    MY_ADDRESS = os.environ.get("MY_ADDRESS") 
     sendemail(MY_ADDRESS,'pb2233@stern.nyu.edu','pb2233@stern.nyu.edu',subject,message,MY_ADDRESS,SENDGRID_API_KEY)
     
     
+
 def checkthreshold(df):
     df['final']=np.where(df['SALE_PRICE']<=df['Threshold'],1,0)
     df.to_csv('final.csv')
     
+
+
 def sendemail(from_addr, to_addr_list, cc_addr_list,
               subject, message,
               login, password,
