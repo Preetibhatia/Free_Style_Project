@@ -15,7 +15,14 @@ pip install matplotlib
 pip install pytest 
 #(only if you'll be writing tests)
 
-create directory app
+create directory app (first-time)
+create directory data(first-time)
+
+
+Create .env file and save your desired sender email id and password
+Ensure .env is included in .gitgnore file
+
+
 
 From within the virtual environment, demonstrate your ability to run the Python script from the command-line:
 python amazon.py
